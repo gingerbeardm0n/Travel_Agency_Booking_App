@@ -92,7 +92,7 @@ namespace ProjectOrganizer.DAL
         public bool UpdateDepartment(Department updatedDepartment)
         {
             bool result = false;
-            string sqlCommand = "UPDATE department SET name = @name WHERE department_id = @id;";
+            string sqlCommand = "UPDATE department SET name = @name WHERE department_id = @department_id;";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
