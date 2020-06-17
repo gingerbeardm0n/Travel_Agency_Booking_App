@@ -112,6 +112,7 @@ namespace ProjectOrganizer.DAL
                 cmd.Parameters.AddWithValue("@project_id", projectId);
 
                 int count = cmd.ExecuteNonQuery();
+                //DELETE statements return 0 rows affected
                 if (count > 0)
                 {
                     result = true;
@@ -132,18 +133,18 @@ namespace ProjectOrganizer.DAL
         /// <returns>The new id of the project.</returns>
         public int CreateProject(Project newProject)
         {
-            string sqlCommand = "INSERT INTO project (project_id, name, from_date, to_date) VALUES (@department_id, @name, @from_date, @to_date);";
+            string sqlCommand = "INSERT INTO project (name, from_date, to_date) VALUES (@name, @from_date, @to_date);";
             int result = -1;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
+
                     SqlCommand cmd = new SqlCommand(sqlCommand, conn);
-                    cmd.Parameters.AddWithValue("@project_id", newProject.ProjectId);
                     cmd.Parameters.AddWithValue("@name", newProject.Name);
-                    cmd.Parameters.AddWithValue("@from_date", newProject.StartDate);
-                    cmd.Parameters.AddWithValue("@to_date", newProject.EndDate);
+                    cmd.Parameters.AddWithValue("@from_date", newProject.StartDate.Year + "-0" +newProject.StartDate.Month +"-0"+newProject.StartDate.Day);
+                    cmd.Parameters.AddWithValue("@to_date", newProject.EndDate.Year + "-0" + newProject.EndDate.Month + "-0" + newProject.EndDate.Day);
 
                     int count = cmd.ExecuteNonQuery();
                     if (count > 0)
