@@ -45,8 +45,9 @@ namespace ProjectOrganizer.DAL
                         string employeeID = Convert.ToString(reader["employee_id"]);
 
                         Employee temp = new Employee();
-                        temp.BirthDate = DateTime.Parse(birthDate);
-                        temp.HireDate = DateTime.Parse(hireDate);
+                        temp.BirthDate = DateTime.Parse(birthDate); //I believe i need to make a change here
+                        //temp.BirthDate = temp.S
+                        temp.HireDate = DateTime.Parse(hireDate); //I believe i need to make a change here
                         temp.EmployeeId = int.Parse(employeeID);
                         temp.DepartmentId = int.Parse(departmentID);
                         temp.FirstName = firstName;
@@ -101,8 +102,8 @@ namespace ProjectOrganizer.DAL
                         string employeeID = Convert.ToString(reader["employee_id"]);
 
                         Employee temp = new Employee();
-                        temp.BirthDate = DateTime.Parse(birthDate);
-                        temp.HireDate = DateTime.Parse(hireDate);
+                        temp.BirthDate = DateTime.Parse(birthDate); //I believe i need to make a change here
+                        temp.HireDate = DateTime.Parse(hireDate); //I believe i need to make a change here
                         temp.EmployeeId = int.Parse(employeeID);
                         temp.DepartmentId = int.Parse(departmentID);
                         temp.FirstName = firstName;
@@ -150,8 +151,8 @@ namespace ProjectOrganizer.DAL
                         string employeeID = Convert.ToString(reader["employee_id"]);
 
                         Employee temp = new Employee();
-                        temp.BirthDate = DateTime.Parse(birthDate);
-                        temp.HireDate = DateTime.Parse(hireDate);
+                        temp.BirthDate = DateTime.Parse(birthDate); //I believe i need to make a change here
+                        temp.HireDate = DateTime.Parse(hireDate); //I believe i need to make a change here
                         temp.EmployeeId = int.Parse(employeeID);
                         temp.DepartmentId = int.Parse(departmentID);
                         temp.FirstName = firstName;
