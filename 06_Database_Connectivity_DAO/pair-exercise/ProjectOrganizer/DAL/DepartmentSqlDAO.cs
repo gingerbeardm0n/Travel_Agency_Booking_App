@@ -59,7 +59,7 @@ namespace ProjectOrganizer.DAL
         /// <returns>The id of the new department (if successful).</returns>
         public int CreateDepartment(Department newDepartment)
         {
-            string sqlCommand = "INSERT INTO department (department_id, name) VALUES (@department_id, @name);";
+            string sqlCommand = "INSERT INTO department (name) VALUES (@name);";
             int result = -1;
             try
             {
@@ -67,7 +67,6 @@ namespace ProjectOrganizer.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(sqlCommand, conn);
-                    cmd.Parameters.AddWithValue("@department_id", newDepartment.Id);
                     cmd.Parameters.AddWithValue("@name", newDepartment.Name);
 
                     int count = cmd.ExecuteNonQuery();
