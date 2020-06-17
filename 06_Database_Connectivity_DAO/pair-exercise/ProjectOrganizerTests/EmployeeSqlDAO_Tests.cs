@@ -24,8 +24,9 @@ namespace ProjectOrganizerTests
                 conn.Open();
 
                 string sql_insert = "INSERT INTO employee (department_id, first_name, last_name, job_title, birth_date, gender, hire_date) " +
-                    "VALUES (5, 'JoEli', 'Collinsall', 'Master of the Universe', '2042-06-06', 'Male', '2043-01-01')";
+                    "VALUES (3, 'JoEli', 'Collinsall', 'Master of the Universe', '2042-06-06', 'M', '2043-01-01')";
                 SqlCommand cmd = new SqlCommand(sql_insert, conn);
+                int count = cmd.ExecuteNonQuery();
             }
         }
 
@@ -52,6 +53,26 @@ namespace ProjectOrganizerTests
                 }
             }
             Assert.IsTrue(found);
+        }
+
+        [TestMethod]
+        public void Search_Test()
+        {
+            EmployeeSqlDAO accessObj = new EmployeeSqlDAO(connectionString);
+            IList<Employee> listofMatchedEmployess = accessObj.Search("JoEli", "Collinsall");
+
+            Assert.AreEqual(1, listofMatchedEmployess.Count);
+            
+        }
+
+        [TestMethod]
+        public void GetEmployeesWithoutProjects_Test()
+        {
+            EmployeeSqlDAO accessObj = new EmployeeSqlDAO(connectionString);
+            IList<Employee> listOfEmployeesToFire = accessObj.GetEmployeesWithoutProjects();
+
+            Assert.AreEqual(3, listOfEmployeesToFire.Count);
+
         }
     }
 }

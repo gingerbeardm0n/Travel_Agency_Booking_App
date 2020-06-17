@@ -45,9 +45,9 @@ namespace ProjectOrganizer.DAL
                         string employeeID = Convert.ToString(reader["employee_id"]);
 
                         Employee temp = new Employee();
-                        temp.BirthDate = DateTime.Parse(birthDate); //I believe i need to make a change here
+                        temp.BirthDate = DateTime.Parse(birthDate);
                         //temp.BirthDate = temp.S
-                        temp.HireDate = DateTime.Parse(hireDate); //I believe i need to make a change here
+                        temp.HireDate = DateTime.Parse(hireDate); 
                         temp.EmployeeId = int.Parse(employeeID);
                         temp.DepartmentId = int.Parse(departmentID);
                         temp.FirstName = firstName;
@@ -102,8 +102,8 @@ namespace ProjectOrganizer.DAL
                         string employeeID = Convert.ToString(reader["employee_id"]);
 
                         Employee temp = new Employee();
-                        temp.BirthDate = DateTime.Parse(birthDate); //I believe i need to make a change here
-                        temp.HireDate = DateTime.Parse(hireDate); //I believe i need to make a change here
+                        temp.BirthDate = DateTime.Parse(birthDate);
+                        temp.HireDate = DateTime.Parse(hireDate); 
                         temp.EmployeeId = int.Parse(employeeID);
                         temp.DepartmentId = int.Parse(departmentID);
                         temp.FirstName = firstName;
@@ -130,7 +130,7 @@ namespace ProjectOrganizer.DAL
         public IList<Employee> GetEmployeesWithoutProjects()
         {
             List<Employee> result = new List<Employee>();
-            string sql_command = "SELECT * FROM employee e LEFT JOIN project_employee pe ON e.employee_id = pe.employee.id WHERE pe.project_id IS NULL;";
+            string sql_command = "SELECT * FROM employee e LEFT JOIN project_employee pe ON e.employee_id = pe.employee_id WHERE pe.project_id IS NULL;";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
