@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace Capstone.Models
@@ -13,23 +14,36 @@ namespace Capstone.Models
         public int DailyRate { get; }
         public int MaxOccupancy { get; }
         public bool Accessablity { get; }
-        public int TotalCost { get; }
-        public DateTime OpenFrom { get; }
-        public DateTime OpenTo { get; }
+        public int ReservationLength { get; set; }
+        public int TotalCost
+        {
+            get
+            {
+               return DailyRate * ReservationLength;
+            }
+        }
+        public string OpenFrom { get; }
+        public string OpenTo { get; }
 
         //---------- CONSTRUCTORS ------------------------------------------------------------------------------------------------------------------------
 
-        public Space(int spaceID, string spaceName, int dailyRate, int maxOccupancy, int accessability, int reservationLength, DateTime openFrom, DateTime openTo)
+        public Space(int spaceID, string spaceName, Decimal dailyRate, int maxOccupancy, bool accessability, int openFrom, int openTo)
         {
             SpaceID = spaceID;
             SpaceName = spaceName;
-            DailyRate = dailyRate;
+            DailyRate = (int)dailyRate;
             MaxOccupancy = maxOccupancy;
-            Accessablity = accessability == 1;
-            TotalCost = reservationLength * DailyRate;
-            OpenFrom = openFrom;
-            OpenTo = openTo;
-
+            Accessablity = accessability;
+            if (openFrom != 0 && openTo != 0)
+            {
+                OpenFrom = new DateTime(2020, openFrom, 1).ToString("MMM", CultureInfo.InvariantCulture);
+                OpenTo = new DateTime(2020, openTo, 1).ToString("MMM", CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                OpenFrom = "";
+                OpenTo = "";
+            }
         }
 
     }

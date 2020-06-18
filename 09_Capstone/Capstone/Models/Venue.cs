@@ -8,6 +8,7 @@ namespace Capstone.Models
     {
         //---------- PROPERTIES ----------------------------------------------------------------------------------------------------------------------------------
 
+        public int VenueID { get; set; }
         public string VenueName { get; set; }
         public string City { get; set; }
         public string State { get; set; }

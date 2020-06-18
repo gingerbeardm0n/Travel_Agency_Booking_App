@@ -14,11 +14,10 @@ namespace Capstone.DAL
             connectionString = dbConnectionString;
         }
 
-
         public Venue GetSpecificVenue(string venueName)
         {
             Venue result = new Venue();
-            string sql_command = "SELECT v.name, ci.name city, ci.state_abbreviation state, ca.name category, v.description FROM venue v "
+            string sql_command = "SELECT v.id, v.name, ci.name city, ci.state_abbreviation state, ca.name category, v.description FROM venue v "
             +"JOIN city ci ON v.city_id = ci.id "
             + "JOIN state s ON ci.state_abbreviation = s.abbreviation "
             + "JOIN category_venue cv ON v.id = cv.venue_id "
@@ -37,11 +36,12 @@ namespace Capstone.DAL
                     {
                         if(loopCounter == 1)
                         {
+                            string venueID = Convert.ToString(reader["id"]);
                             string nameOfVenue = Convert.ToString(reader["name"]);
                             string city = Convert.ToString(reader["name"]);
                             string state = Convert.ToString(reader["state"]);
                             string description = Convert.ToString(reader["description"]);
-                            //result = new Venue(nameOfVenue, city, state, description);
+                            result.VenueID = int.Parse(venueID);
                             result.VenueName = nameOfVenue;
                             result.City = city;
                             result.State = state;
