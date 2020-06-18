@@ -46,6 +46,16 @@ namespace Capstone.Models
             }
         }
 
+        public Space(int spaceID, string spaceName, Decimal dailyRate, int maxOccupancy, bool accessability)
+        {
+            SpaceID = spaceID;
+            SpaceName = spaceName;
+            DailyRate = (int)dailyRate;
+            MaxOccupancy = maxOccupancy;
+            Accessablity = accessability;
+        }
+
+
     }
 
 
