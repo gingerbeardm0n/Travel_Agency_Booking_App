@@ -24,7 +24,7 @@ namespace Capstone.DAL
 
             string sqlQueryReservationID = "SELECT reservation_id FROM reservation WHERE reserved_for = @reserved_for AND start_date = @start_date;";
 
-            Reservation result = null;
+            
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
