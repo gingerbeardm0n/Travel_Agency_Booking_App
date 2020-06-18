@@ -8,11 +8,11 @@ namespace Capstone.Models
     {
         //---------- PROPERTIES ----------------------------------------------------------------------------------------------------------------------------------
 
-        public string VenueName { get; }
-        public string City { get; }
-        public string State { get; }
-        public List<string> Category { get; set; }
-        public string Description { get; }
+        public string VenueName { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public List<string> Category { get; set; } = new List<string>();
+        public string Description { get; set; }
         public string Location
         {
             get
@@ -22,15 +22,22 @@ namespace Capstone.Models
         }
 
         //---------- CONSTRUCTORS ------------------------------------------------------------------------------------------------------------------------
-
-        public Venue(string venueName, string city, string state, List<string> category, string description)
+        public Venue()
         {
-            VenueName = venueName;
-            City = city;
-            State = state;
-            Category = category;
-            Description = description;
-
         }
+        public Venue(string name)
+        {
+            VenueName = name;
+        }
+
+        //public Venue(string venueName, string city, string state, /*List<string> category,*/ string description)
+        //{
+        //    VenueName = venueName;
+        //    City = city;
+        //    State = state;
+        //    Category = category;
+        //    Description = description;
+
+        //}
     }
 }
