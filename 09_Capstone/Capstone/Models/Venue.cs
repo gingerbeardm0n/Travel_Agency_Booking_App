@@ -4,18 +4,33 @@ using System.Text;
 
 namespace Capstone.Models
 {
-    class Venue
+    public class Venue
     {
-        //This class contains the definition of a single reservation
-
         //---------- PROPERTIES ----------------------------------------------------------------------------------------------------------------------------------
 
-        public int ReservationID { get; }
-        public int SpaceID { get; }
-        public int NumberOfAttendees { get; }
-        public DateTime StartDate { get; } // This is where we need to figure out what the heck format we want to use for our dates
-        public DateTime EndDate { get; }   // I just put datetime in for now, and we'll most likely change later
-        public string ReservationName { get; }
+        public string VenueName { get; }
+        public string City { get; }
+        public string State { get; }
+        public List<string> Category { get; set; }
+        public string Description { get; }
+        public string Location
+        {
+            get
+            {
+                return City + ", " + State;
+            }
+        }
 
+        //---------- CONSTRUCTORS ------------------------------------------------------------------------------------------------------------------------
+
+        public Venue(string venueName, string city, string state, List<string> category, string description)
+        {
+            VenueName = venueName;
+            City = city;
+            State = state;
+            Category = category;
+            Description = description;
+
+        }
     }
 }
