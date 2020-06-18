@@ -10,7 +10,8 @@ namespace Capstone.Models
 
         //---------- PROPERTIES ----------------------------------------------------------------------------------------------------------------------------------
 
-        public int ReservationID { get; }
+        public int ReservationID { get; set; }
+        public int SpaceID { get; }
         public string VenueName { get; }
         public string SpaceName { get; }
         public string ReservationName { get; }
@@ -30,10 +31,10 @@ namespace Capstone.Models
 
         //---------- CONSTRUCTORS ------------------------------------------------------------------------------------------------------------------------
 
-        public Reservation(int reservationID, string venueName, string spaceName, string reservationName,
+        public Reservation(int spaceID, string venueName, string spaceName, string reservationName,
             int numberOfAttendees, DateTime startDate, int reservationLength, int dailyRate)
         {
-            ReservationID = reservationID;
+            SpaceID = spaceID;
             VenueName = venueName;
             SpaceName = spaceName;
             ReservationName = reservationName;
@@ -44,5 +45,8 @@ namespace Capstone.Models
             EndDate = startDate.AddDays(ReservationLength);
             
         }
+
+        //---------- METHODS -----------------------------------------------------------------------------------------------------------------------------
+
     }
 }

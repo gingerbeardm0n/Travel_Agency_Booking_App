@@ -28,3 +28,11 @@ SELECT TOP 5 id, name, daily_rate, max_occupancy, is_accessible FROM space
 WHERE venue_id = 2 AND max_occupancy >= 30 
 AND id NOT IN(SELECT space_id FROM reservation WHERE (start_date BETWEEN '2020-06-15' AND '2020-06-18') OR (end_date BETWEEN '2020-06-15' AND '2020-06-18') 
 OR (start_date < '2020-06-15' AND end_date > '2020-06-18'));
+
+--Inserts a reservation to the database (reservation_id is the identity so cannot insert into table with out setting identity insert to on)
+BEGIN TRANSACTION;
+
+INSERT INTO reservation (space_id, number_of_attendees, start_date, end_date, reserved_for)
+VALUES (40, 60, '2020-08-01', '2020-08-15', 'Test Reservation string')
+
+ROLLBACK TRANSACTION
