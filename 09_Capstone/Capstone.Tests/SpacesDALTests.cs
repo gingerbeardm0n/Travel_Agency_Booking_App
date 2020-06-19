@@ -59,7 +59,8 @@ namespace Capstone.Tests
             {
                 conn.Open();
                 string sqlInsertVenue = "INSERT INTO venue (name, city_id, description) VALUES ('ZZZZ', 3, 'XXXX')";
-                string sqlInsertSpace = "INSERT INTO space (name, is_accessible, venue_id, daily_rate, max_occupancy) VALUES ('ZZZZ', 1, @venue_id, 600.00, 100000)";
+                string sqlInsertSpace = "INSERT INTO space (name, is_accessible, venue_id, daily_rate, max_occupancy, open_from, open_to) VALUES ('RRRR', 0, @venue_id, 350.00, 100000, 2, 10)"
+                     + "INSERT INTO space (name, is_accessible, venue_id, daily_rate, max_occupancy) VALUES ('ZZZZ', 1, @venue_id, 600.00, 100000)";
                 string sqlGetInsertedVenueID = "SELECT id FROM Venue WHERE name = 'ZZZZ'";
 
                 SqlCommand cmd = new SqlCommand(sqlInsertVenue, conn);
@@ -85,7 +86,7 @@ namespace Capstone.Tests
             List<Space> result = testObj.SearchForAvailableSpaces(newId, testDate, 1, 99999);
             
             //Assert
-            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(2, result.Count);
         }
     }
 }
