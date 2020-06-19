@@ -75,13 +75,13 @@ namespace Capstone.DAL
             //Create end date
             DateTime endDate = startDate.AddDays(eventLength);
 
-            string sqlCommand = "SELECT * FROM space s "
+            string sqlCommand = "SELECT TOP 5 * FROM space s "
                                 +"where venue_id = @venue_id "
                                 +"AND s.id NOT IN ( "
                                 +"SELECT s.id from reservation r "
                                 +"JOIN space s on r.space_id = s.id "
                                 +"WHERE s.venue_id = @venue_id "
-                                +"AND r.end_date >= @req_from_date AND r.start_date <= @req_to_date) ";
+                                +"AND r.end_date >= @req_from_date AND r.start_date <= @req_to_date);";
             List<Space> result = new List<Space>();
             try
             {

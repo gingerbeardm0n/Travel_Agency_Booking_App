@@ -259,7 +259,6 @@ namespace Capstone
         public void SearchSpacesMenu(Venue venueInfo)
         {
             bool done = false;
-            bool returnToVenueSelection = false;
             while (!done)
             {
                 List<Space> searchResults;
@@ -294,10 +293,13 @@ namespace Capstone
                     }
                     else
                     {
-                        Console.WriteLine("\nNo space availability matching available constraints, you will be returned to the venue selection menu.\n");
-                        Console.ReadLine();
-                        done = true;
-                        returnToVenueSelection = true;
+                        Console.WriteLine("\nNo space availability matching available constraints, would you like to make another search? Y or N? \n");
+                        string failureResponse = Console.ReadLine();
+                        if (failureResponse == "N")
+                        {
+                            done = true;
+                        }
+                        
                     }
                 }
                 catch (Exception e)
@@ -305,14 +307,7 @@ namespace Capstone
                     Console.WriteLine("Invalid entry format, Please try again.");
                 }
             }
-            if (returnToVenueSelection)
-            {
-                ViewVenuesMenu();
-            }
-            else
-            {
-                PrintMainMenu();
-            }
+            PrintMainMenu();
         }
         public void ReservationOnSearchMenu(List<Space> searchResults, int attendeeCount, DateTime startDate, Venue venueInfo, int daysNeeded)
         {

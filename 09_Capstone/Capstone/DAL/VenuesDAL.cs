@@ -20,8 +20,8 @@ namespace Capstone.DAL
             string sql_command = "SELECT v.id, v.name, ci.name city, ci.state_abbreviation state, ca.name category, v.description FROM venue v "
             +"JOIN city ci ON v.city_id = ci.id "
             + "JOIN state s ON ci.state_abbreviation = s.abbreviation "
-            + "JOIN category_venue cv ON v.id = cv.venue_id "
-            + "JOIN category ca ON cv.category_id = ca.id "
+            + "LEFT JOIN category_venue cv ON v.id = cv.venue_id "
+            + "LEFT JOIN category ca ON cv.category_id = ca.id "
             + "WHERE v.name = @venue_name;";
             try
             {
@@ -47,7 +47,16 @@ namespace Capstone.DAL
                             result.State = state;
                             result.Description = description;
                         }
-                        string category = Convert.ToString(reader["category"]);
+                        string category;
+                             if (DBNull.Value.Equals(reader["category"]))
+                        {
+                            category = "No Categories Listed, It is What You Make It.";
+                        }
+                        else
+                        {
+                            category = Convert.ToString(reader["category"]);
+                        }
+
                         result.Category.Add(category);
                         loopCounter++;
                     }
