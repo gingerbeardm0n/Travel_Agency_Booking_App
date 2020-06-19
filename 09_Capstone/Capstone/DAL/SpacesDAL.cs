@@ -77,6 +77,7 @@ namespace Capstone.DAL
 
             string sqlCommand = "SELECT TOP 5 id, name, daily_rate, max_occupancy, is_accessible FROM space "
                                         + "WHERE venue_id = @venue_id AND max_occupancy >= @max_occupancy "
+                                        + "AND (open_from IS NULL OR open_from <= @start_month) AND (open_to IS NULL OR open_to >= @end_month) "
                                         + "AND id NOT IN(SELECT space_id FROM reservation "
                                         + "WHERE (start_date BETWEEN @start_date AND @end_date) "
                                         + "OR (end_date BETWEEN @start_date AND @end_date) "
@@ -92,6 +93,8 @@ namespace Capstone.DAL
                     cmd.Parameters.AddWithValue("@max_occupancy", peopleInAttendance);
                     cmd.Parameters.AddWithValue("@start_date", startDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("@end_date", endDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@start_month", startDate.Month);
+                    cmd.Parameters.AddWithValue("@end_month", endDate.Month);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
