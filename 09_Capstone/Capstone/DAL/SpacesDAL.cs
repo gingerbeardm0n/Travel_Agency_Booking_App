@@ -75,13 +75,13 @@ namespace Capstone.DAL
             //Create end date
             DateTime endDate = startDate.AddDays(eventLength);
 
-            string sqlCommand = "SELECT TOP 5 id, name, daily_rate, max_occupancy, is_accessible FROM space "
-                                        + "WHERE venue_id = @venue_id AND max_occupancy >= @max_occupancy "
-                                        + "AND (open_from IS NULL OR open_from <= @start_month) AND (open_to IS NULL OR open_to >= @end_month) "
-                                        + "AND id NOT IN(SELECT space_id FROM reservation "
-                                        + "WHERE (start_date BETWEEN @start_date AND @end_date) "
-                                        + "OR (end_date BETWEEN @start_date AND @end_date) "
-                                        + "OR (start_date < @start_date AND end_date > @end_date)); ";
+            string sqlCommand = "SELECT * FROM space s "
+                                +"where venue_id = @venue_id "
+                                +"AND s.id NOT IN ( "
+                                +"SELECT s.id from reservation r "
+                                +"JOIN space s on r.space_id = s.id "
+                                +"WHERE s.venue_id = @venue_id "
+                                +"AND r.end_date >= @req_from_date AND r.start_date <= @req_to_date) ";
             List<Space> result = new List<Space>();
             try
             {
@@ -90,11 +90,8 @@ namespace Capstone.DAL
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(sqlCommand, conn);
                     cmd.Parameters.AddWithValue("@venue_id", venueID);
-                    cmd.Parameters.AddWithValue("@max_occupancy", peopleInAttendance);
-                    cmd.Parameters.AddWithValue("@start_date", startDate.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("@end_date", endDate.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("@start_month", startDate.Month);
-                    cmd.Parameters.AddWithValue("@end_month", endDate.Month);
+                    cmd.Parameters.AddWithValue("@req_from_date", startDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@req_to_date", endDate.ToString("yyyy-MM-dd"));
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
