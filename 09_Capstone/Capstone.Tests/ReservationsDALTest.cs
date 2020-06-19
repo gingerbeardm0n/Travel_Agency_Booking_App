@@ -5,6 +5,7 @@ using System.Text;
 using Capstone.DAL;
 using System.Data.SqlClient;
 using Capstone.Models;
+using Capstone.Tests;
 
 namespace Capstone.Tests
 {
@@ -21,15 +22,24 @@ namespace Capstone.Tests
             
             //----- Act ---------------------------------------------------
 
+            int startingRowCount = GetRowCount("reservation");
             Reservation testReservation = testObj.AddReservationToDataBase(dummyReservation);
+            int endingRowCount = GetRowCount("city");
 
             //----- Assert ------------------------------------------------
 
-            Assert.AreEqual(45, testReservation.ReservationID);
+            Assert.AreNotEqual(startingRowCount, endingRowCount);
         }
-
-
-
+        protected int GetRowCount(string table)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand($"SELECT COUNT(*) FROM {table}", conn);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count;
+            }
+        }
     }
 }
 
