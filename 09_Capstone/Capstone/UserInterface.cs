@@ -28,7 +28,7 @@ namespace Capstone
 
         public void Run()
         {
-            Console.WriteLine("Reached the User Interface.");
+            Console.WriteLine("Reached the User Interface. \nPlease press enter to continue."); //Inserted new line with additonal message JB
             Console.ReadLine();
 
             PrintMainMenu();
@@ -47,7 +47,7 @@ namespace Capstone
                 switch (menuInput)
                 {
                     case "1":
-                        ViewVenuesMenu();  //Method call for view venues menu
+                        ViewVenuesMenu();
                         break;
                     case "Q":
                         done = true;
@@ -66,7 +66,7 @@ namespace Capstone
             Console.WriteLine("Which Venue would you like to view?");
             List<Venue> listOfVenueNames = venueIO.GetAllVenues();
             bool done = false;
-            bool previousMenu = false;
+            bool viewMainMenu = false;
             bool nextMenu = false;
             string venueNameForNextMenu = "";
             int maxMenuItems = 0;
@@ -88,7 +88,7 @@ namespace Capstone
                     if (menuInput == "R")
                     {
                         done = true;
-                        previousMenu = true;
+                        viewMainMenu = true;
                     }
                     else if (int.Parse(menuInput) > 0 && int.Parse(menuInput) <= maxMenuItems)
                     {
@@ -107,7 +107,7 @@ namespace Capstone
                 }
 
             }
-            if (previousMenu)
+            if (viewMainMenu)
             {
                 PrintMainMenu();
             }
@@ -130,7 +130,7 @@ namespace Capstone
             while (!done)
             {
 
-                Console.WriteLine(venueName);
+                Console.WriteLine("\n" + venueName);//inserted new line here JB
                 Console.WriteLine("Location: " + venueInfo.Location);
 
                 Console.Write("Categories: ");
@@ -192,6 +192,7 @@ namespace Capstone
             }
             else
             {
+                Console.WriteLine("Invalid Entry, please enter 1, 2, or R"); //inseted error message JB
                 ViewVenuesMenu();
             }
         }

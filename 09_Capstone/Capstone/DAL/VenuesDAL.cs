@@ -38,7 +38,7 @@ namespace Capstone.DAL
                         {
                             string venueID = Convert.ToString(reader["id"]);
                             string nameOfVenue = Convert.ToString(reader["name"]);
-                            string city = Convert.ToString(reader["name"]);
+                            string city = Convert.ToString(reader["city"]); //fixed bug here, was displaying the venue name where the city anme should have been
                             string state = Convert.ToString(reader["state"]);
                             string description = Convert.ToString(reader["description"]);
                             result.VenueID = int.Parse(venueID);
