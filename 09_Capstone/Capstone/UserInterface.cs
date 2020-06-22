@@ -48,6 +48,7 @@ namespace Capstone
                 {
                     case "1":
                         ViewVenuesMenu();
+                        done = true;
                         break;
                     case "Q":
                         done = true;
