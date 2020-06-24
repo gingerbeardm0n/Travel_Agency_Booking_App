@@ -80,7 +80,7 @@ namespace Capstone.DAL
                                 +"SELECT s.id from reservation r "
                                 +"JOIN space s on r.space_id = s.id "
                                 +"WHERE s.venue_id = @venue_id "
-                                +"AND s.max_occupancy >= @max_occupancy "
+                                //+"AND s.max_occupancy >= @max_occupancy "
                                 +"AND r.end_date >= @req_from_date AND r.start_date <= @req_to_date);";
             List<Space> result = new List<Space>();
             try
@@ -92,7 +92,7 @@ namespace Capstone.DAL
                     cmd.Parameters.AddWithValue("@venue_id", venueID);
                     cmd.Parameters.AddWithValue("@req_from_date", startDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("@req_to_date", endDate.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("@max_occupancy", peopleInAttendance);
+                  //  cmd.Parameters.AddWithValue("@max_occupancy", peopleInAttendance);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -102,11 +102,14 @@ namespace Capstone.DAL
                         Decimal spaceDailyRate = Convert.ToDecimal(reader["daily_rate"]);
                         int spaceMaxOccupancy = Convert.ToInt32(reader["max_occupancy"]);
 
-                        Space temp = new Space(spaceID, spaceName,
-                            spaceDailyRate, spaceMaxOccupancy,
-                            spaceAccessible);
-                        temp.ReservationLength = eventLength;
-                        result.Add(temp);
+                        if (spaceMaxOccupancy >= peopleInAttendance)
+                        {
+                            Space temp = new Space(spaceID, spaceName,
+                                spaceDailyRate, spaceMaxOccupancy,
+                                spaceAccessible);
+                            temp.ReservationLength = eventLength;
+                            result.Add(temp);
+                        }
                     }
 
                 }

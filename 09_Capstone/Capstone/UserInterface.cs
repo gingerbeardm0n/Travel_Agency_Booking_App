@@ -280,7 +280,7 @@ namespace Capstone
                     if (searchResults.Count > 0)
                     {
                         Console.WriteLine("\nThe following spaces are available based on your needs:\n");
-                        Console.WriteLine("Space #".PadRight(10) + "Name".PadRight(30) + 
+                        Console.WriteLine("Space #".PadRight(10) + "Name".PadRight(40) + 
                             "Daily Rate".PadRight(13) + "Max Occup.".PadRight(13) + 
                             "Accessible?".PadRight(14) + "Total Cost"); 
                         foreach (Space searchResult in searchResults)
@@ -291,7 +291,7 @@ namespace Capstone
                                 accessible = "No";
                             }
                             Console.WriteLine(searchResult.SpaceID.ToString().PadRight(10) + 
-                                searchResult.SpaceName.PadRight(30) + "$" +  
+                                searchResult.SpaceName.PadRight(40) + "$" +  
                                 searchResult.DailyRate.ToString().PadRight(12) + 
                                 searchResult.MaxOccupancy.ToString().PadRight(13) + 
                                 accessible.PadRight(14) + "$" + searchResult.TotalCost); //JNB added $ before daily rate
