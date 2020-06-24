@@ -14,7 +14,7 @@ namespace Capstone.Models
         public int DailyRate { get; }
         public int MaxOccupancy { get; }
         public bool Accessablity { get; }
-        public int ReservationLength { get; set; }
+        public int ReservationLength { get; set; }//JNB removed set, trying to get eventLength
         public int TotalCost
         {
             get

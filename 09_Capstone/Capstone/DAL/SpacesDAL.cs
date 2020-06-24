@@ -65,7 +65,6 @@ namespace Capstone.DAL
             }
             catch (Exception e)
             {
-
             }
             return result;
         }
@@ -104,6 +103,7 @@ namespace Capstone.DAL
                         Space temp = new Space(spaceID, spaceName,
                             spaceDailyRate, spaceMaxOccupancy,
                             spaceAccessible);
+                        temp.ReservationLength = eventLength;
                         result.Add(temp);
                     }
 
